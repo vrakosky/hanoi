@@ -7,7 +7,8 @@ public class Tour implements IPile<Disque>{
 
 	int hauteurMax = 3;
 	
-	Queue<Disque> disques=new ArrayDeque<>();
+        //Remplacement de Queue par ArrayQueue
+	ArrayDeque<Disque> disques=new ArrayDeque<>();
 	
 	@Override
 	public boolean empiler(Disque d) {
@@ -19,7 +20,9 @@ public class Tour implements IPile<Disque>{
         else{
             if( (disques.element().d>d.d) && (taille()<hauteurMax) ){
                 res=true;
-                disques.offer(d);
+                disques.offerFirst(d);
+                //Nous avions besoin ici d'une liste LIFO(last in first out) et non de FIFO(last in first out), 
+                //Queue etait une FIFO, d'où l'utilité ici de ArrayDeque qui permet une LIFO via la fonction offerFirst()
             }
             else{
                 res=false;
